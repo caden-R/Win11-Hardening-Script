@@ -1,5 +1,12 @@
 # Display the computer's hostname
 Write-Host "Computer Name: $env:COMPUTERNAME"
+# Define menu options
+$menuOptions = @(
+    "Document the system",
+    "Enable updates",
+    "User Auditing",
+    "Exit"
+)
 
 # Check for Administrator privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -33,13 +40,7 @@ foreach ($user in $users) {
 Write-Host "Windows Version:"
 Get-ComputerInfo | Select-Object -Property WindowsProductName, WindowsVersion, OsHardwareAbstractionLayer
 
-# Define menu options
-$menuOptions = @(
-    "Document the system",
-    "Enable updates",
-    "User Auditing",
-    "Exit"
-)
+
 
 # Define functions for each option
 function Get-SystemDocument {
@@ -71,3 +72,4 @@ function Get-UserAuditing {
         default { Write-Host "`nInvalid selection. Please try again." }
     }
 } while ($true)
+
